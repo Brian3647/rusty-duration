@@ -1,0 +1,17 @@
+on: [push, pull_request]
+
+name: Bun
+
+jobs:
+  main:
+    name: Check fmt, lint, test, and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+
+      - run: bun install
+      - run: bunx prettier --check .
+      - run: bun lint
+      - run: bun test
+      - run: bunx tsc
